@@ -17,4 +17,8 @@ footer {
 input {
   border: none;
   outline: none;
+  background: #eee;
+  margin-left: 2px;
+  margin-right: 2px;
+  border-bottom: 1px solid #e5e5e5;
 }
