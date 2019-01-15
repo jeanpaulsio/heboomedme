@@ -2,16 +2,11 @@
   text-align: center;
 }
 
-.editable-line {
-  text-align: center;
-  border: 0;
-}
-
-.line {
-  font-size: 20px;
-  margin: 10px;
-}
-
 .button {
   margin: 20px;
+}
+
+input {
+  border: none;
+  outline: none;
 }

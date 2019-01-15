@@ -1,33 +1,33 @@
 import React, { Component } from "react";
-import "./App.css";
+import AutosizeInput from "react-input-autosize";
 
-const EDITABLE_FIELDS = [1, 3, 4, 5, 7, 9, 11, 13, 15, 17, 19, 21];
+import "./App.css";
 
 class App extends Component {
   state = {
     lyrics: [
       "Overheard in",
-      "Cavs locker room", // 1
+      "Cavs locker room",
       "after",
-      "Game 7.", //
-      '"He got me"', //
-      "Lebron", //
+      "Game 7.",
+      '"He got me"',
+      "Lebron",
       "said of",
-      "Tatum's dunk over him.", //
+      "Tatum's dunk over him.",
       "That f***ing",
-      "Tatum", //
+      "Tatum",
       "boomed me.",
-      "Lebron", //
+      "Lebron",
       "added",
-      '"He\'s so good",', //
+      '"He\'s so good",',
       "repeating it four times.",
-      "Lebron", //
+      "Lebron",
       "then said",
-      "he", //
+      "he",
       "wanted to add",
-      "Tatum", //
+      "Tatum",
       "to the list of",
-      "players he works out with", //
+      "players he works out with",
       "this summer.",
     ],
   };
@@ -36,20 +36,12 @@ class App extends Component {
     navigator.clipboard.writeText(this.state.lyrics.join(" "));
 
   handleChange = (e, index) => {
-    // lebron is 5, 11, 15
-    // tatum is 9, 19
     const newLine = e.target.value;
-    const newLyrics = this.state.lyrics.map((lyric, i) => {
-      if (i === index) {
-        return newLine;
-      }
-
-      return lyric;
+    const lyrics = this.state.lyrics.map((lyric, i) => {
+      return i === index ? newLine : lyric;
     });
 
-    this.setState({
-      lyrics: newLyrics,
-    });
+    this.setState({ lyrics });
   };
 
   render() {
@@ -57,28 +49,15 @@ class App extends Component {
       <div className="main">
         <h1>He Boomed Me</h1>
         {this.state.lyrics.map((line, index) => {
-          if (EDITABLE_FIELDS.includes(index)) {
-            return (
-              <input
-                className="editable-line"
-                key={index}
-                placeholder={line}
-                onChange={e => this.handleChange(e, index)}
-              />
-            );
-          }
-
           return (
-            <span key={index} className="line">
-              {line}
-            </span>
+            <AutosizeInput
+              key={index}
+              placeholder={line}
+              value={this.state.lyrics[index]}
+              onChange={e => this.handleChange(e, index)}
+            />
           );
         })}
-        <div>
-          <button className="button" onClick={this.copyToClipboard}>
-            copy
-          </button>
-        </div>
       </div>
     );
   }
