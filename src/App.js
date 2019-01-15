@@ -34,6 +34,10 @@ class App extends Component {
     buttonText: "Copy to Clipboard",
   };
 
+  componentDidMount() {
+    this.textInput0.focus();
+  }
+
   handleChange = (e, index) => {
     this.setState({
       lyrics: this.state.lyrics.map((lyric, i) =>
@@ -66,6 +70,9 @@ class App extends Component {
         {this.state.lyrics.map((line, index) => {
           return (
             <AutosizeInput
+              ref={input => {
+                this[`textInput${index}`] = input;
+              }}
               key={index}
               placeholder={line}
               value={this.state.lyrics[index]}
