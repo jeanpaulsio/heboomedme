@@ -70,6 +70,7 @@ class App extends Component {
               placeholder={line}
               value={this.state.lyrics[index]}
               onChange={e => this.handleChange(e, index)}
+              onFocus={e => e.target.select()}
             />
           );
         })}
