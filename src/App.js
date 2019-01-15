@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AutosizeInput from "react-input-autosize";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 import "./App.css";
 
@@ -30,21 +31,35 @@ class App extends Component {
       "players he works out with",
       "this summer.",
     ],
+    buttonText: "Copy to Clipboard",
   };
 
-  copyToClipboard = () =>
-    navigator.clipboard.writeText(this.state.lyrics.join(" "));
-
   handleChange = (e, index) => {
-    const newLine = e.target.value;
-    const lyrics = this.state.lyrics.map((lyric, i) => {
-      return i === index ? newLine : lyric;
+    this.setState({
+      lyrics: this.state.lyrics.map((lyric, i) =>
+        i === index ? e.target.value : lyric,
+      ),
     });
+  };
 
-    this.setState({ lyrics });
+  handleCopy = (_text, result) => {
+    this.setState(
+      { buttonText: result ? "Boomed!" : "Something went wrong" },
+      () => {
+        setTimeout(
+          () => this.setState({ buttonText: "Copy to Clipboard" }),
+          3000,
+        );
+      },
+    );
   };
 
   render() {
+    console.log("💥 He's so good 💥");
+    console.log("💥 He's so good 💥");
+    console.log("💥 He's so good 💥");
+    console.log("💥 He's so good 💥");
+    console.log("\n\n\n");
     return (
       <div className="main">
         <h1>He Boomed Me</h1>
@@ -58,9 +73,15 @@ class App extends Component {
             />
           );
         })}
+        <footer>
+          <CopyToClipboard
+            text={this.state.lyrics.join(" ")}
+            onCopy={this.handleCopy}>
+            <button>{this.state.buttonText}</button>
+          </CopyToClipboard>
+        </footer>
       </div>
     );
   }
 }
-
 export default App;

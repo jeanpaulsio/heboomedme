@@ -1,9 +1,11 @@
 .main {
   text-align: center;
+  width: 80%;
+  margin: auto;
 }
 
-.button {
-  margin: 20px;
+footer {
+  margin-top: 30px;
 }
 
 input {
